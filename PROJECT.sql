@@ -247,3 +247,45 @@ INSERT INTO orders(orderid, customerid, bookid, quantity, price, subtotal, tax, 
 INSERT INTO orders(orderid, customerid, bookid, quantity, price, subtotal, tax, total, payment) VALUES (6, 1, 4, 3,  60, 3*60 , 09, 189, '5432101234');
 
 /
+
+--view for displaying book details (author, title, publisher and price)
+CREATE OR REPLACE VIEW book_view AS
+SELECT a.authorname, p.publishername, b.title, b.price
+FROM author a
+JOIN bookauthor ba ON a.authorid = ba.authorid
+JOIN book b ON ba.bookid = b.bookid
+JOIN publisher p ON b.publicationid = p.publisherid;
+
+--View for displaying nuumber of books available in the store
+CREATE OR REPLACE VIEW books_available AS
+SELECT storeid, SUM(quantity) AS NUM_BOOKS_AVAILABLE
+FROM inventory
+GROUP BY storeid
+ORDER BY storeid;
+
+--view for displaying order summary
+CREATE OR REPLACE VIEW order_details AS
+SELECT
+  orders.orderid,
+  orders.total,
+  orders.customerid,
+  customer.firstname,
+  customer.lastname,
+  author.authorname,
+  book.title
+FROM
+  orders
+  JOIN customer ON orders.customerid = customer.customerid
+  JOIN book ON orders.bookid = book.bookid
+  JOIN bookauthor ON book.bookid = bookauthor.bookid
+  JOIN author ON bookauthor.authorid = author.authorid
+ORDER BY orderid;
+
+--view for displaying number of employees at each store
+CREATE OR REPLACE VIEW employee_count AS
+SELECT storeid, COUNT(*) AS num_employees
+FROM employee
+GROUP BY storeid
+ORDER BY storeid;
+
+commit;
