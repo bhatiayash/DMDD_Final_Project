@@ -213,6 +213,148 @@ NOCACHE
 NOCYCLE;
 /
 
+--package to handle and drop users
+SET SERVEROUTPUT ON;
+create or replace PACKAGE HANDLE_USER AS 
+
+   
+  procedure drop_user(
+    IN_username VARCHAR
+    );
+
+
+END HANDLE_USER;
+/
+create or replace PACKAGE BODY HANDLE_USER AS 
+
+   
+  procedure drop_user(
+    IN_username VARCHAR
+    )
+  as 
+  IS_TRUE  number;
+sql_stmt    VARCHAR2(200);
+Invalid_username exception;
+user_not_found exception ;
+v_user_name all_users.username%type;
+cursor c_all_users is
+    select username from all_users;
+BEGIN
+if length(IN_username) <= 0
+        then 
+            raise Invalid_username;
+    end if;
+
+    IS_TRUE := 0;
+
+    OPEN c_all_users; 
+   LOOP 
+   FETCH c_all_users into v_user_name; 
+      EXIT WHEN c_all_users%notfound; 
+      
+    IF (
+    trim(lower(v_user_name)) = trim(lower(IN_username)) 
+      )
+    then 
+    sql_stmt := 'DROP user '||IN_username;
+    dbms_output.put_line(sql_stmt );
+    EXECUTE IMMEDIATE sql_stmt;    
+    dbms_output.put_line(IN_username||  ' user is dropped.' );
+    IS_TRUE := 1;
+    END IF;
+    
+
+   END LOOP; 
+
+   CLOSE c_all_users; 
+
+   if IS_TRUE = 0 then raise user_not_found ;
+   end if;
+
+commit;
+
+EXCEPTION
+when Invalid_username
+then dbms_output.put_line('Please enter correct username');
+when user_not_found
+then dbms_output.put_line( IN_username || ' not found');
+when others
+then dbms_output.put_line(sqlerrm);
+END drop_user;
+
+END HANDLE_USER;
+/
+--DROP USERS
+EXEC HANDLE_USER.drop_user('CUSTOMER_USER');
+EXEC HANDLE_USER.drop_user('EMPLOYEE_USER');
+/
+--procedure to insert new customer
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE add_new_customer(
+IN_FIRSTNAME IN CUSTOMER.FIRSTNAME%type,
+IN_LASTNAME IN CUSTOMER.LASTNAME%type,
+IN_GENDER IN CUSTOMER.GENDER%type,
+IN_ADDRESSID IN CUSTOMER.ADDRESSID%type,
+IN_EMAIL IN CUSTOMER.EMAIL%type
+)
+AS
+invalid_FIRSTNAME exception;
+invalid_LASTNAME exception;
+invalid_GENDER exception;
+invalid_ADDRESSID exception;
+invalid_EMAIL exception;
+BEGIN
+
+if (IN_FIRSTNAME) IS NULL
+    then
+        raise invalid_FIRSTNAME;
+    elsif (IN_LASTNAME) IS NULL
+        then
+        raise invalid_LASTNAME;
+    elsif (IN_GENDER) IS NULL
+        then
+        raise invalid_GENDER;
+    elsif length(IN_ADDRESSID) <=0 or (IN_ADDRESSID is null)
+        then
+        raise invalid_ADDRESSID;
+    elsif (IN_EMAIL) IS NULL
+        then
+        raise invalid_EMAIL;
+end if;
+
+insert into customer(
+customerid,
+firstname,
+lastname,
+gender,
+addressid,
+email
+)
+values(
+customer_id_seq.nextval,
+IN_FIRSTNAME,
+IN_LASTNAME,
+IN_GENDER,
+IN_ADDRESSID,
+IN_EMAIL
+);
+COMMIT;
+EXCEPTION
+WHEN invalid_FIRSTNAME
+THEN dbms_output.put_line('Please enter correct customer first name');
+WHEN invalid_LASTNAME
+THEN dbms_output.put_line('Please enter correct customer last name');
+WHEN invalid_GENDER
+THEN dbms_output.put_line('Please enter correct customer gender');
+WHEN invalid_ADDRESSID
+THEN dbms_output.put_line('Please enter correct customer addressid');
+WHEN invalid_EMAIL
+THEN dbms_output.put_line('Please enter correct customer email');
+WHEN OTHERS
+THEN dbms_output.put_line(sqlerrm);
+END add_new_customer;
+/
+
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'Stephen King');
