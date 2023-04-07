@@ -385,3 +385,153 @@ INSERT INTO address VALUES (ADDRESS_ID_SEQ.NEXTVAL, 9012, 'Kingswood Drive', 'Na
 INSERT INTO address VALUES (ADDRESS_ID_SEQ.NEXTVAL, 1023, 'Linden Lane', 'Rittman', 'OH', 44270, 'USA'); 
 INSERT INTO address VALUES (ADDRESS_ID_SEQ.NEXTVAL, 2345, 'Magnolia Drive', 'Seville', 'OH', 44273, 'USA'); 
 INSERT INTO address VALUES (ADDRESS_ID_SEQ.NEXTVAL, 3456, 'North Street', 'Stow', 'OH', 44224, 'USA');
+
+--inserting data to store
+INSERT INTO store (storeid, addressid, phonenumber) VALUES (STORE_ID_SEQ.NEXTVAL, 7001, 8573131234);
+INSERT INTO store (storeid, addressid, phonenumber) VALUES (STORE_ID_SEQ.NEXTVAL, 7002, 6175551212);
+INSERT INTO store (storeid, addressid, phonenumber) VALUES (STORE_ID_SEQ.NEXTVAL, 7003, 2125555555);
+INSERT INTO store (storeid, addressid, phonenumber) VALUES (STORE_ID_SEQ.NEXTVAL, 7004, 3125555555);
+INSERT INTO store (storeid, addressid, phonenumber) VALUES (STORE_ID_SEQ.NEXTVAL, 7005, 4155555555);
+
+
+--inserting data to employee
+INSERT INTO employee (employeeid, storeid, employeefirstname, employeelastname, addressid, salary) VALUES (EMPLOYEE_ID_SEQ.NEXTVAL, 5001, 'Steven', 'Ponting', 7006, 90000);
+INSERT INTO employee (employeeid, storeid, employeefirstname, employeelastname, addressid, salary) VALUES (EMPLOYEE_ID_SEQ.NEXTVAL, 5002, 'Emily', 'Wong', 7007, 80000);
+INSERT INTO employee (employeeid, storeid, employeefirstname, employeelastname, addressid, salary) VALUES (EMPLOYEE_ID_SEQ.NEXTVAL, 5003, 'John', 'Smith', 7008, 70000);
+INSERT INTO employee (employeeid, storeid, employeefirstname, employeelastname, addressid, salary) VALUES (EMPLOYEE_ID_SEQ.NEXTVAL, 5004, 'Sarah', 'Johnson', 7009, 85000);
+INSERT INTO employee (employeeid, storeid, employeefirstname, employeelastname, addressid, salary) VALUES (EMPLOYEE_ID_SEQ.NEXTVAL, 5005, 'Mike', 'Davis', 7010, 75000);
+INSERT INTO employee (employeeid, storeid, employeefirstname, employeelastname, addressid, salary) VALUES (EMPLOYEE_ID_SEQ.NEXTVAL, 5001, 'Zach', 'Clinton', 7011, 55000);
+
+
+--inserting data to inventory
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4001, 50);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4002, 25);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4003, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4004, 75);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4005, 10);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4006, 20);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4007, 45);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4008, 60);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4009, 80);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5001, 4010, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4001, 50);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4002, 25);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4003, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4004, 75);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4005, 10);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4006, 20);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4007, 45);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4008, 60);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4009, 80);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5002, 4010, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4001, 50);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4002, 25);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4003, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4004, 75);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4005, 10);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4006, 20);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4007, 45);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4008, 60);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4009, 80);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5003, 4010, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4001, 50);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4002, 25);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4003, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4004, 75);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4005, 10);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4006, 20);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4007, 45);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4008, 60);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4009, 80);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5004, 4010, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4001, 50);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4002, 25);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4003, 100);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4004, 75);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4005, 10);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4006, 20);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4007, 45);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4008, 60);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4009, 80);
+INSERT INTO inventory (storeid, bookid, quantity) VALUES (5005, 4010, 100);
+
+--inserting data to customer
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Rick', 'Hayden', 'Male', 7011, 'rickhayden@gmail.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Sarah', 'Lee', 'Female', 7012, 'sarahlee@hotmail.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'John', 'Doe', 'Male', 7013, 'johndoe@yahoo.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Emily', 'Chen', 'Female', 7014, 'emilychen@gmail.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Mike', 'Nguyen', 'Male', 7015, 'mikenguyen@gmail.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Avery', 'Parker', 'Male', 7016, 'averyparker@yahoo.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Grace', 'Kim', 'Female', 7017, 'gracekim@gmail.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Jacob', 'Garcia', 'Male', 7018, 'jacobgarcia@hotmail.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'Lily', 'Tran', 'Female', 7019, 'lilytran@yahoo.com');
+INSERT INTO customer (customerid, firstname, lastname, gender, addressid, email) VALUES (CUSTOMER_ID_SEQ.NEXTVAL, 'David', 'Wu', 'Male', 7020, 'davidwu@gmail.com');
+
+--inserting data to orders
+
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9001, 4001, 2, 100, '1234567890',5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9002, 4002, 3, 50, '2345678901',5002);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9003, 4003, 4, 20, '3456789012',5003);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9004, 4004, 5, 30, '4567890123',5004);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9005, 4005, 6, 80, '5678901234',5005);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9001, 4004, 3, 30, '5432101234',5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9009, 4001, 1, 100, '1234567890', 5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9001, 4002, 3, 50, '0987654321', 5002);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9002, 4003, 2, 20, '1357908642', 5003);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9003, 4004, 1, 30, '2468013579', 5004);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9004, 4005, 2, 80, '9876543210', 5005);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9005, 4006, 1, 75, '0123456789', 5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9006, 4007, 3, 100, '5678901234', 5002);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9007, 4008, 2, 120, '3216549870', 5003);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9008, 4009, 1, 90, '0987123456', 5004);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9009, 4010, 2, 50, '5432167890', 5005);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9010, 4001, 3, 100, '4321098765', 5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9001, 4002, 2, 50, '0987654321', 5002);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9001, 4003, 1, 20, '2468013579', 5003);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9002, 4004, 2, 30, '5678901234', 5004);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9003, 4005, 3, 80, '0123456789', 5005);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9004, 4006, 2, 75, '0987123456', 5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9005, 4007, 1, 100, '5432167890', 5002);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9006, 4008, 2, 120, '4321098765', 5003);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9007, 4009, 3, 90, '3216549870', 5004);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9008, 4010, 2, 50, '0123456789', 5005);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9009, 4001, 1, 100, '9876543210', 5001);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9010, 4002, 2, 50, '1234567890', 5002);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9003, 4003, 3, 20, '5678901234', 5003);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9001, 4004, 2, 30, '3216549870', 5004);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9002, 4005, 1, 80, '0987123456', 5005);
+INSERT INTO orders(orderid, customerid, bookid, quantity, price, payment, storeid) VALUES (ORDERS_ID_SEQ.NEXTVAL, 9003, 4006, 2, 75, '5432167890', 5001);
+
+/
+--view for displaying book details (author, title, publisher and price)
+CREATE OR REPLACE VIEW book_view AS
+SELECT a.authorname, p.publishername, b.title, b.price
+FROM author a
+JOIN bookauthor ba ON a.authorid = ba.authorid
+JOIN book b ON ba.bookid = b.bookid
+JOIN publisher p ON b.publicationid = p.publisherid;
+
+--View for displaying nuumber of books available in the store
+CREATE OR REPLACE VIEW books_available AS
+SELECT storeid, SUM(quantity) AS NUM_BOOKS_AVAILABLE
+FROM inventory
+GROUP BY storeid
+ORDER BY storeid;
+
+--view for displaying order summary
+CREATE OR REPLACE VIEW order_details AS
+SELECT
+  orders.orderid,
+  orders.total,
+  orders.customerid,
+  customer.firstname,
+  customer.lastname,
+  author.authorname,
+  book.title
+FROM
+  orders
+  JOIN customer ON orders.customerid = customer.customerid
+  JOIN book ON orders.bookid = book.bookid
+  JOIN bookauthor ON book.bookid = bookauthor.bookid
+  JOIN author ON bookauthor.authorid = author.authorid
+ORDER BY orderid;
