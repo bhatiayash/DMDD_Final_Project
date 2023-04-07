@@ -535,3 +535,84 @@ FROM
   JOIN bookauthor ON book.bookid = bookauthor.bookid
   JOIN author ON bookauthor.authorid = author.authorid
 ORDER BY orderid;
+
+--view for displaying number of employees at each store
+CREATE OR REPLACE VIEW employee_count AS
+SELECT storeid, COUNT(*) AS num_employees
+FROM employee
+GROUP BY storeid
+ORDER BY storeid;
+/
+
+--View for higest selling books
+CREATE OR REPLACE VIEW highest_selling_books AS
+SELECT b.bookid, b.title, SUM(o.quantity) AS total_sales
+FROM book b
+JOIN orders o ON b.bookid = o.bookid
+GROUP BY b.bookid, b.title
+ORDER BY total_sales DESC;
+/
+
+--view to
+CREATE OR REPLACE VIEW v_store_sales AS
+SELECT storeid, SUM(quantity) AS total_sales
+FROM orders
+GROUP BY storeid
+order by total_sales desc;
+/
+
+--View to
+CREATE OR REPLACE VIEW v_most_books_sold_per_store AS
+SELECT storeid, bookid, quantity
+FROM (
+    SELECT storeid, bookid, quantity,
+        ROW_NUMBER() OVER (PARTITION BY storeid ORDER BY quantity DESC) AS rn
+    FROM orders
+) t
+WHERE rn = 1;
+/
+
+--Get the list of all authors who have written at least one book in every genre
+CREATE OR REPLACE VIEW author_every_genre AS
+SELECT a.authorid, a.authorname
+FROM author a
+WHERE NOT EXISTS (
+    SELECT DISTINCT b.genre
+    FROM book b
+    WHERE b.genre NOT IN (
+        SELECT DISTINCT b2.genre
+        FROM book b2
+        JOIN bookauthor ba ON b2.bookid = ba.bookid
+        WHERE ba.authorid = a.authorid
+    )
+);
+/
+
+--view to display number of orders from each store
+CREATE OR REPLACE VIEW num_of_orders_each_store AS
+SELECT store.storeid, COUNT(orders.orderid) as num_orders
+FROM store
+JOIN orders ON store.storeid = orders.storeid
+GROUP BY store.storeid
+ORDER BY num_orders DESC;
+/
+
+--view to display maximum amount spent by all customers
+CREATE OR REPLACE VIEW highest_total_spend AS
+SELECT customer.customerid, customer.firstname, customer.lastname, SUM(orders.total) as total_spent
+FROM customer
+JOIN orders ON orders.customerid = customer.customerid
+GROUP BY customer.customerid, customer.firstname, customer.lastname
+ORDER BY total_spent DESC;
+/
+
+--View to display top selling author
+CREATE OR REPLACE VIEW top_selling_author AS
+SELECT authorname, SUM(quantity) as total_sold
+FROM author
+JOIN bookauthor ON author.authorid = bookauthor.authorid
+JOIN book ON book.bookid = bookauthor.bookid
+JOIN orders ON orders.bookid = book.bookid
+GROUP BY authorname
+ORDER BY total_sold DESC;
+/
