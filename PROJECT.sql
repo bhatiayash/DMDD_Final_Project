@@ -355,6 +355,114 @@ THEN dbms_output.put_line(sqlerrm);
 END add_new_customer;
 /
 
+--procedure to insert new author
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE add_new_author(
+IN_AUTHORNAME IN AUTHOR.AUTHORNAME%type
+)
+AS
+invalid_AUTHORNAME exception;
+BEGIN
+
+if (IN_AUTHORNAME) IS NULL
+    then
+        raise invalid_AUTHORNAME;
+end if;
+
+insert into AUTHOR(
+AUTHORID,
+AUTHORNAME
+)
+values(
+author_id_seq.nextval,
+IN_AUTHORNAME
+);
+COMMIT;
+EXCEPTION
+WHEN invalid_AUTHORNAME
+THEN dbms_output.put_line('Please enter correct author name');
+WHEN OTHERS
+THEN dbms_output.put_line(sqlerrm);
+END add_new_author;
+/
+
+--procedure to insert new book
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE add_new_book(
+IN_TITLE IN BOOK.TITLE%type,
+IN_ISBN IN BOOK.ISBN%type,
+IN_GENRE IN BOOK.GENRE%type,
+IN_PUBLICATIONYEAR IN BOOK.PUBLICATIONYEAR%type,
+IN_PUBLICATIONID IN BOOK.PUBLICATIONID%type,
+IN_PRICE IN BOOK.PRICE%type
+)
+AS
+invalid_TITLE exception;
+invalid_ISBN exception;
+invalid_GENRE exception;
+invalid_PUBLICATIONYEAR exception;
+invalid_PUBLICATIONID exception;
+invalid_PRICE exception;
+BEGIN
+
+if (IN_TITLE) IS NULL
+    then
+        raise invalid_TITLE;
+    elsif (IN_ISBN) IS NULL OR (IN_ISBN) <= 0
+        then
+        raise invalid_ISBN;
+    elsif (IN_GENRE) IS NULL
+        then
+        raise invalid_GENRE;
+    elsif (IN_PUBLICATIONYEAR) is null OR (IN_PUBLICATIONYEAR) <= 0
+        then
+        raise invalid_PUBLICATIONYEAR;
+    elsif (IN_PUBLICATIONID) IS NULL OR (IN_PUBLICATIONID) <= 0
+        then
+        raise invalid_PUBLICATIONID;
+    elsif (IN_PRICE) IS NULL OR (IN_PRICE) <= 0
+        then
+        raise invalid_PRICE;
+end if;
+
+insert into book(
+bookid,
+title,
+isbn,
+genre,
+publicationyear,
+publicationid,
+price
+)
+values(
+book_id_seq.nextval,
+IN_TITLE,
+IN_ISBN,
+IN_GENRE,
+IN_PUBLICATIONYEAR,
+IN_PUBLICATIONID,
+IN_PRICE
+);
+COMMIT;
+EXCEPTION
+WHEN invalid_TITLE
+THEN dbms_output.put_line('Please enter correct title, it cannot be null');
+WHEN invalid_ISBN
+THEN dbms_output.put_line('Please enter correct ISBN, it cannot be null');
+WHEN invalid_GENRE
+THEN dbms_output.put_line('Please enter correct Genre, it cannot be null');
+WHEN invalid_PUBLICATIONYEAR
+THEN dbms_output.put_line('Please enter correct publication year');
+WHEN invalid_PUBLICATIONID
+THEN dbms_output.put_line('Please enter correct publicationid');
+WHEN invalid_PRICE
+THEN dbms_output.put_line('Please enter correct price');
+WHEN OTHERS
+THEN dbms_output.put_line(sqlerrm);
+END add_new_book;
+/
+
+
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'Stephen King');
