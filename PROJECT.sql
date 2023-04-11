@@ -534,6 +534,30 @@ THEN dbms_output.put_line(sqlerrm);
 END add_new_store;
 /
 
+--Trigger to set default salary of an employee
+CREATE OR REPLACE TRIGGER set_default_salary
+BEFORE INSERT ON employee
+FOR EACH ROW
+BEGIN
+    IF :NEW.salary IS NULL THEN
+        :NEW.salary := 50000;
+    END IF;
+END;
+/
+--Trigger to prevent deletion of publisher if any book is associated with it
+CREATE OR REPLACE TRIGGER prevent_publisher_delete
+BEFORE DELETE ON publisher
+FOR EACH ROW
+DECLARE
+    cnt NUMBER;
+BEGIN
+SELECT COUNT(*) INTO cnt FROM book WHERE publicationid = :OLD.publisherid;
+IF cnt > 0 THEN
+    RAISE_APPLICATION_ERROR(-20001, 'Cannot delete publisher with associated books');
+END IF;
+END;
+/
+
 
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
