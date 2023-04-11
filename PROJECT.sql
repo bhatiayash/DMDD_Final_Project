@@ -534,6 +534,23 @@ THEN dbms_output.put_line(sqlerrm);
 END add_new_store;
 /
 
+--TRIGGER to calculate the subtotal, tax and total of the order before inserting  the record
+CREATE OR REPLACE TRIGGER update_order_total
+BEFORE INSERT ON orders
+FOR EACH ROW
+BEGIN
+    IF :NEW.subtotal IS NULL THEN
+    :NEW.subtotal := :NEW.price * :NEW.quantity;
+    END IF;
+    IF :NEW.tax IS NULL THEN
+    :NEW.tax := 0.1 * :NEW.price * :NEW.quantity;
+    END IF;
+    IF :NEW.total IS NULL THEN
+    :NEW.total := 1.1 * :NEW.price * :NEW.quantity;
+    END IF;
+END;
+/
+
 --Trigger to set default salary of an employee
 CREATE OR REPLACE TRIGGER set_default_salary
 BEFORE INSERT ON employee
