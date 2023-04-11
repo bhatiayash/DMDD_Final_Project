@@ -462,6 +462,78 @@ THEN dbms_output.put_line(sqlerrm);
 END add_new_book;
 /
 
+--procedure to insert new publisher
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE add_new_publisher(
+IN_PUBLISHERNAME IN PUBLISHER.PUBLISHERNAME%type
+)
+AS
+invalid_PUBLISHERNAME exception;
+BEGIN
+
+if (IN_PUBLISHERNAME) IS NULL
+    then
+        raise invalid_PUBLISHERNAME;
+end if;
+
+insert into PUBLISHER(
+PUBLISHERID,
+PUBLISHERNAME
+)
+values(
+publisher_id_seq.nextval,
+IN_PUBLISHERNAME
+);
+COMMIT;
+EXCEPTION
+WHEN invalid_PUBLISHERNAME
+THEN dbms_output.put_line('Please enter correct publisher name, it cannot be null');
+WHEN OTHERS
+THEN dbms_output.put_line(sqlerrm);
+END add_new_publisher;
+/
+
+
+--procedure to insert new store
+SET SERVEROUTPUT ON;
+CREATE OR REPLACE PROCEDURE add_new_store(
+IN_ADDRESSID IN STORE.ADDRESSID%type,
+IN_PHONENUMBER IN STORE.PHONENUMBER%type
+)
+AS
+invalid_ADDRESSID exception;
+invalid_PHONENUMBER exception;
+BEGIN
+
+if (IN_ADDRESSID) IS NULL OR (IN_ADDRESSID) <= 0
+    then
+        raise invalid_ADDRESSID;
+    elsif (IN_PHONENUMBER) IS NULL OR (IN_PHONENUMBER) <= 0
+    then
+        raise invalid_PHONENUMBER;
+end if;
+
+insert into STORE(
+STOREID,
+ADDRESSID,
+PHONENUMBER
+)
+values(
+store_id_seq.nextval,
+IN_ADDRESSID,
+IN_PHONENUMBER
+);
+COMMIT;
+EXCEPTION
+WHEN invalid_ADDRESSID
+THEN dbms_output.put_line('Please enter correct addressid');
+WHEN invalid_PHONENUMBER
+THEN dbms_output.put_line('Please enter correct phonenumber');
+WHEN OTHERS
+THEN dbms_output.put_line(sqlerrm);
+END add_new_store;
+/
+
 
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
