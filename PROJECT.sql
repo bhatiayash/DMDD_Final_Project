@@ -652,6 +652,46 @@ THEN dbms_output.put_line('Number of books not available in store');
 END add_order;
 /
 
+--PACKAGES
+
+CREATE OR REPLACE PACKAGE BOOKMANAGEMENT IS 
+
+    PROCEDURE AddBookQuantity(book_id number, store_id number, add_quantity number);
+    PROCEDURE ReduceBookQuantity(book_id number, store_id number, reduce_quantity number);
+
+END;
+/
+CREATE OR REPLACE PACKAGE BODY BOOKMANAGEMENT IS 
+
+    	PROCEDURE ReduceBookQuantity (book_id IN number, store_id IN number, reduce_quantity IN number)
+	AS
+	BEGIN 
+    		UPDATE INVENTORY SET QUANTITY = QUANTITY - reduce_quantity WHERE BOOKID = book_id AND STOREID = store_id; 
+	END;
+
+	PROCEDURE AddBookQuantity (book_id IN number, store_id IN number, add_quantity IN number)
+	AS
+	BEGIN
+    		UPDATE INVENTORY SET QUANTITY = QUANTITY + add_quantity WHERE BOOKID = book_id AND STOREID = store_id; 
+	END;
+END;
+
+/
+
+CREATE OR REPLACE TRIGGER DeleteOrder 
+AFTER DELETE ON ORDERS
+FOR EACH ROW
+BEGIN
+    BOOKMANAGEMENT.AddBookQuantity(:OLD.BOOKID, :OLD.STOREID, :OLD.QUANTITY);
+END;
+/
+CREATE OR REPLACE TRIGGER OrderPlaced 
+AFTER INSERT ON ORDERS
+FOR EACH ROW
+BEGIN
+    BOOKMANAGEMENT.ReduceBookQuantity(:NEW.BOOKID, :NEW.STOREID, :NEW.QUANTITY);
+END;
+/
 
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
