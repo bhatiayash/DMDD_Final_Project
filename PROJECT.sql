@@ -574,7 +574,27 @@ IF cnt > 0 THEN
 END IF;
 END;
 /
+--Function to display number of books available in a store for a single bookid
+CREATE OR REPLACE FUNCTION get_book_quantity (p_store_id IN NUMBER, p_book_id IN NUMBER) RETURN NUMBER
+IS
+    v_quantity Inventory.Quantity%TYPE;
+BEGIN
+    SELECT Quantity INTO v_quantity FROM Inventory
+    WHERE StoreID = p_store_id AND BookID = p_book_id;
+    RETURN v_quantity;
+END get_book_quantity;
+/
 
+--function to display book price
+CREATE OR REPLACE FUNCTION get_book_price (p_book_id IN NUMBER) RETURN NUMBER
+IS
+    v_price book.price%TYPE;
+BEGIN
+    SELECT Price INTO v_price FROM BOOK
+    WHERE BookID = p_book_id;
+    RETURN v_price;
+END get_book_price;
+/
 
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
