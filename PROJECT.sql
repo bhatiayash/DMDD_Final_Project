@@ -596,6 +596,63 @@ BEGIN
 END get_book_price;
 /
 
+--procedure to insert a new order
+CREATE OR REPLACE PROCEDURE add_order (
+    p_customerid in NUMBER,
+    p_bookid in NUMBER,
+    p_quantity in NUMBER,
+    p_payment in VARCHAR2,
+    p_storeid in NUMBER
+)
+AS
+invalid_customerid exception;
+invalid_bookid exception;
+invalid_quantity exception;
+invalid_payment exception;
+invalid_storeid exception;
+invalid_quantity1 exception;
+BEGIN
+
+if (p_customerid) is null OR (p_customerid) <= 0
+    then   
+        raise invalid_customerid;
+    elsif (p_bookid) is null OR (p_bookid) <= 0
+    then
+        raise invalid_bookid;
+    elsif (p_quantity) is null OR (p_quantity) <=0
+    then
+        raise invalid_quantity;
+    elsif (p_payment) is null
+    then
+        raise invalid_payment;
+    elsif (p_storeid) is null OR (p_storeid) <= 0
+    then
+        raise invalid_storeid;
+    ELSIF (p_quantity) > (get_book_quantity(p_storeid, p_bookid))
+    THEN
+        RAISE invalid_quantity1;
+end if;
+
+    INSERT INTO orders (orderid, customerid, bookid, quantity, price, payment, storeid)
+    VALUES (orders_id_seq.NEXTVAL, p_customerid, p_bookid,p_quantity, get_book_price(p_bookid), p_payment, p_storeid);
+    COMMIT;
+EXCEPTION
+WHEN invalid_customerid
+THEN dbms_output.put_line('Please enter correct customerid');
+WHEN invalid_bookid
+THEN dbms_output.put_line('Please enter correct bookid');
+WHEN invalid_quantity
+THEN dbms_output.put_line('Please enter correct quantity');
+WHEN invalid_payment
+THEN dbms_output.put_line('Please enter correct payment');
+WHEN invalid_storeid
+THEN dbms_output.put_line('Please enter correct storeid');
+WHEN invalid_quantity1
+THEN dbms_output.put_line('Number of books not available in store');
+END add_order;
+/
+
+
 --inserting data to author
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'J.K. Rowling');
 INSERT INTO author VALUES (AUTHOR_ID_SEQ.NEXTVAL, 'Stephen King');
