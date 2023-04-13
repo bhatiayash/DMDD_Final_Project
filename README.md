@@ -10,4 +10,3 @@ The existing manual system for handling data for a bookstore takes a long time a
 
 Instructions:
 1. Execute usercreation(grants).sql to create a new user and provide grants to the user.
-2. Execute DDLDML(ADMIN_YASH).sql from the user that was created in the first step.
